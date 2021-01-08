@@ -15,7 +15,8 @@ public class Rate {
 
 		double rate = 1.005d;
 		
-		double amt = 2500000;
+		final double initAmt = 2500000;
+		double amt = initAmt;
 //		double amt = 100000000;
 		
 		double profitSum = 0;
@@ -79,7 +80,7 @@ public class Rate {
 			double diff = amt- aaa;
 			profitSum += diff;
 			
-			String str2 = String.format("%10s %15s %15s %15s %15s %15d ", start, formatter.format(amt), formatter.format(diff), formatter.format(profitSum), dayOfWeek, i);
+			String str2 = String.format("%10s %15s %15s %15s %15s %15d %15d", start, formatter.format(amt), formatter.format(diff), formatter.format(profitSum), dayOfWeek, new Double((amt-initAmt)/initAmt*100).intValue(), i);
 			System.out.println(str2);
 			i++;
 			
