@@ -14,21 +14,20 @@ public class Rate {
 		DecimalFormat formatter = new DecimalFormat("###,###");
 
 		double rate = 1.005d;
-		
-		final double initAmt = 2500000;
+		double addAmt = 0d;
+		double initAmt = 4500000;
 		double amt = initAmt;
 //		double amt = 100000000;
 		
 		double profitSum = 0;
 		
-		String s = "2021-01-10";
+		String s = "2021-01-17";
 //		String e = "2028-01-04";
 		String e = "2028-01-04";
 		LocalDate start = LocalDate.parse(s);
 		LocalDate end = LocalDate.parse(e);
 		List<LocalDate> totalDates = new ArrayList<>();
 		
-		String prevMonth = "2020-11";
 		String prevYear = "";
 		
 		Map<String, String> amtMap = new HashMap<String, String>();
@@ -45,7 +44,9 @@ public class Rate {
 		    LocalDate endDay = ym.atEndOfMonth();
 		    
 		    if(endDay.toString().equals(dateStr)) {
-		    	amt += 50000;
+		    	amt += 100000;
+		    	initAmt += 100000;
+		    	addAmt += 100000;
 		    }
 		    
 		    DayOfWeek dayOfWeek = start.getDayOfWeek();
@@ -70,9 +71,9 @@ public class Rate {
 				amt -= 85000000;
 			}
 			
-			if(amt > 2000000000) {
-				amt -= 200000000;
-				drawAmtSum += 200000000;
+			if(amt > 200000000) {
+				amt -= 20000000;
+				drawAmtSum += 20000000;
 			}
 			
 		    double aaa = amt;
@@ -91,6 +92,10 @@ public class Rate {
 				
 				amtList.add(prevYear);
 			}
+			
+			if(start.equals(LocalDate.parse("2024-01-31")) || amt < 0) {
+				break;
+			}
 		}
 		
 		for (int j = 0; j < amtList.size(); j++) {
@@ -102,6 +107,7 @@ public class Rate {
 		}
 		
 		System.out.println("drawAmtSum => " + formatter.format(drawAmtSum));
+		System.out.println("addAmt => " + formatter.format(addAmt));
 				
 	}
 
